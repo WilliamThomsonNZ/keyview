@@ -1,0 +1,14 @@
+@media (max-width: 1430px) {
+  #unlock-value {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 1200px) {
+  #mandate-grid {
+    display: flex;
+  }
+}
+
+
+
