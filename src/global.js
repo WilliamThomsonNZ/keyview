@@ -1,5 +1,7 @@
 import { handleNewsletter } from "./newsletter";
+import { newsletterSubmit } from "./newsletter-subscribe";
 
+newsletterSubmit();
 //Handle mobile menu
 const openButton = document.getElementById("mobile-open");
 const closeButton = document.getElementById("mobile-close");
@@ -76,7 +78,7 @@ const fundArrow = document.getElementById("fund-arrow");
 let headerOpen = false;
 
 let headerOpenHeight = "273px";
-let headerClosedHeight = "72px";
+let headerClosedHeight = "68px";
 if (window.innerWidth < 992) {
   headerOpenHeight = "239px";
   headerClosedHeight = "59px";
@@ -118,3 +120,31 @@ handleNewsletter();
 //TODO:
 //Implement validation.
 //Send data to an end point.
+
+// subscribeButton.addEventListener("click", subscribe);
+
+// let selected = [];
+
+// const investorTypes = document.querySelectorAll(".radiobutton");
+// investorTypes.forEach((type) => {
+//   type.classList.remove("selected");
+//   type.addEventListener("click", () => {
+//     const value = type.getAttribute("data-value");
+//     const isSelected = handleInvestorType(value, selected);
+//     if (isSelected) {
+//       type.classList.add("selected");
+//     } else {
+//       type.classList.remove("selected");
+//     }
+//   });
+// });
+
+// function handleInvestorType(investorType, selected) {
+//   if (selected.includes(investorType)) {
+//     selected = selected.filter((type) => type !== investorType);
+//     return false;
+//   } else {
+//     selected.push(investorType);
+//     return true;
+//   }
+// }

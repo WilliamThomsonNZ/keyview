@@ -30,3 +30,29 @@ export function handleAccordion({
     }
   });
 }
+
+export function handleErrorStates(value, formInputContainer) {
+  if (value === "") {
+    formInputContainer.querySelector(".errormessage").style.display = "block";
+    return false;
+  } else {
+    formInputContainer.querySelector(".errormessage").style.display = "none";
+    return true;
+  }
+}
+
+export function handleEmailErrorStates(value, formInputContainer) {
+  if (value === "" || !/\S+@\S+\.\S+/.test(value)) {
+    formInputContainer.querySelector(".errormessage").style.display = "block";
+    return false;
+  } else {
+    formInputContainer.querySelector(".errormessage").style.display = "none";
+    return true;
+  }
+}
+
+export function clearInputs(...inputs) {
+  inputs.forEach((input) => {
+    input.value = "";
+  });
+}

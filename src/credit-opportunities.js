@@ -10,7 +10,7 @@ allFaqAccordions.forEach((accordion, index) => {
   const container = accordion;
   let open = index == 0 ? true : false;
   const initialHeight = container.clientHeight;
-  const headerPadding = 4;
+  const headerPadding = 0;
 
   handleAccordion({
     button,

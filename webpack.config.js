@@ -10,7 +10,9 @@ module.exports = {
     ["credit-opportunities"]: "./src/credit-opportunities.js",
     ["flagship"]: "./src/flagship.js",
     ["team"]: "./src/team.js",
+    ["contact"]: "./src/contact.js",
     ["private-credit"]: "./src/private-credit.js",
+    ["application"]: "./src/application.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),

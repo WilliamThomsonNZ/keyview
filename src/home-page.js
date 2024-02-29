@@ -59,3 +59,73 @@ handleAccordion({
   initialHeight: marginInitialHeight,
   headerPadding: 0,
 });
+
+//Set up subscribe.
+const checkbox = document.getElementById("checkbox-home");
+const subscribeButton = document.getElementById("subscribe-button");
+const emailInput = document.getElementById("email-home");
+const errorMessage = document.getElementById("error-message");
+const successMessage = document.getElementById("success-message");
+
+async function subscribe(e) {
+  e.preventDefault();
+  if (emailInput.value === "") {
+    errorMessage.style.display = "block";
+    return;
+  }
+  errorMessage.style.display = "none";
+  subscribeButton.classList.add("loading");
+  try {
+    const response = await fetch(
+      "https://api-bay-beta.vercel.app/api/v1/newsletter-home",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          emailAddress: emailInput.value,
+          investorType: checkbox.checked,
+        }),
+      }
+    );
+    const data = await response.json();
+    subscribeButton.classList.remove("loading");
+    successMessage.style.display = "block";
+    emailInput.value = "";
+    checkbox.checked = false;
+    setTimeout(() => {
+      successMessage.style.display = "hidden";
+    }, 6000);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+subscribeButton.addEventListener("click", subscribe);
+
+let selected = [];
+
+const investorTypes = document.querySelectorAll(".radiobutton");
+investorTypes.forEach((type) => {
+  type.classList.remove("selected");
+  type.addEventListener("click", () => {
+    const value = type.getAttribute("data-value");
+    const isSelected = handleInvestorType(value, selected);
+    if (isSelected) {
+      type.classList.add("selected");
+    } else {
+      type.classList.remove("selected");
+    }
+  });
+});
+
+function handleInvestorType(investorType, selected) {
+  if (selected.includes(investorType)) {
+    selected = selected.filter((type) => type !== investorType);
+    return false;
+  } else {
+    selected.push(investorType);
+    return true;
+  }
+}
