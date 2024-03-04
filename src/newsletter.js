@@ -13,10 +13,10 @@ export function handleNewsletter() {
 
   function showNewsletter() {
     const newsletterShown = sessionStorage.getItem("newsletterShown");
-    if (newsletterShown === null && window.location.pathname === "/") {
+    if (newsletterShown === null) {
       setTimeout(() => {
         openNewsletter();
-      }, 5000);
+      }, 60000);
     }
   }
 
@@ -32,7 +32,7 @@ export function handleNewsletter() {
     }, 500);
   }
 
-  showNewsletter();
+  // showNewsletter();
 
   function closeNewsletter() {
     if (window.innerWidth > 992) {
