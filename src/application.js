@@ -4,6 +4,9 @@ import {
   clearInputs,
 } from "./helpers.js";
 
+const accessButton = document.getElementById("access-button");
+const noText = document.getElementById("no-text");
+
 const contactSubmit = document.getElementById("contact-submit");
 const firstNameContainer = document.getElementById("fName-container");
 const firstNameInput = document.getElementById("First-Name-Contact");
@@ -24,39 +27,51 @@ let investorType = "Yes";
 let dropdownOpen = false;
 
 const dropdownContainer = document.getElementById("dropdown-container");
-const dropDownButton = document.getElementById("dropdown-button");
-const dropDownIcon = document.getElementById("dropdown-icon");
-const dropdownText = document.getElementById("dropdown-text");
+// const dropDownButton = document.getElementById("dropdown-button");
+// const dropDownIcon = document.getElementById("dropdown-icon");
+// const dropdownText = document.getElementById("dropdown-text");
 
-dropDownButton.addEventListener("click", () => {
-  if (dropdownOpen) {
-    dropdownContainer.style.display = "none";
-    dropDownIcon.style.transform = "rotate(0deg)";
-    dropdownOpen = false;
-    return;
-  } else {
-    dropdownContainer.style.display = "flex";
-    dropDownIcon.style.transform = "rotate(180deg)";
-    dropdownOpen = true;
-  }
-});
+// dropDownButton.addEventListener("click", () => {
+//   if (dropdownOpen) {
+//     dropdownContainer.style.display = "none";
+//     dropDownIcon.style.transform = "rotate(0deg)";
+//     dropdownOpen = false;
+//     return;
+//   } else {
+//     dropdownContainer.style.display = "flex";
+//     dropDownIcon.style.transform = "rotate(180deg)";
+//     dropdownOpen = true;
+//   }
+// });
 
-document.getElementById("yes-button").addEventListener("click", () => {
+const yesButton = document.getElementById("yes-button");
+const noButton = document.getElementById("no-button");
+
+yesButton.addEventListener("click", () => {
   investorType = "Yes";
-  dropdownText.textContent = "Yes";
-  dropdownContainer.style.display = "none";
-  dropDownIcon.style.transform = "rotate(0deg)";
+  // dropdownText.textContent = "Yes";
+  // dropdownContainer.style.display = "none";
+  // dropDownIcon.style.transform = "rotate(0deg)";
+  accessButton.style.display = "block";
+  noText.style.display = "none";
+  yesButton.classList.add("selected");
+  noButton.classList.remove("selected");
 });
 
-document.getElementById("no-button").addEventListener("click", () => {
+noButton.addEventListener("click", () => {
   investorType = "No";
-  dropdownText.textContent = "No";
-  dropdownContainer.style.display = "none";
-  dropDownIcon.style.transform = "rotate(0deg)";
+  // dropdownText.textContent = "No";
+  // dropdownContainer.style.display = "none";
+  // dropDownIcon.style.transform = "rotate(0deg)";
+  accessButton.style.display = "none";
+  noText.style.display = "block";
+  noButton.classList.add("selected");
+  yesButton.classList.remove("selected");
 });
 
 async function submitContactForm(e) {
   e.preventDefault();
+  if (investorType === "No") return;
 
   contactSubmit.classList.add("loading");
   //handle
@@ -119,3 +134,5 @@ async function submitContactForm(e) {
 }
 
 contactSubmit.addEventListener("click", submitContactForm);
+
+//Handle hide message.
