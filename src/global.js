@@ -77,7 +77,7 @@ const fundArrow = document.getElementById("fund-arrow");
 
 let headerOpen = false;
 
-let headerOpenHeight = "273px";
+let headerOpenHeight = "206px";
 let headerClosedHeight = "68px";
 if (window.innerWidth < 992) {
   headerOpenHeight = "239px";
