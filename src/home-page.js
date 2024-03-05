@@ -82,20 +82,20 @@ async function subscribe(e) {
   errorMessage.style.display = "none";
   subscribeButton.classList.add("loading");
   try {
-    // const response = await fetch(
-    //   "https://api-bay-beta.vercel.app/api/v1/newsletter-home",
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       emailAddress: emailInput.value,
-    //       investorType: checkbox.checked,
-    //     }),
-    //   }
-    // );
-    // const data = await response.json();
+    const response = await fetch(
+      "https://api-bay-beta.vercel.app/api/v1/newsletter-home",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          emailAddress: emailInput.value,
+          investorType: checkbox.checked,
+        }),
+      }
+    );
+    const data = await response.json();
     subscribeButton.classList.remove("loading");
     successMessage.style.display = "block";
     emailInput.value = "";
