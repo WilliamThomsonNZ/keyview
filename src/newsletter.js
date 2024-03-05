@@ -32,7 +32,7 @@ export function handleNewsletter() {
     }, 500);
   }
 
-  showNewsletter();
+  // showNewsletter();
 
   function closeNewsletter() {
     if (window.innerWidth > 992) {
