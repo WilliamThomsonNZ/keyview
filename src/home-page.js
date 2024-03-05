@@ -66,6 +66,7 @@ const subscribeButton = document.getElementById("subscribe-button");
 const emailInput = document.getElementById("email-home");
 const errorMessage = document.getElementById("error-message");
 const successMessage = document.getElementById("success-message");
+const cantSubscribeText = document.getElementById("cant-subscribe-text");
 
 async function subscribe(e) {
   e.preventDefault();
@@ -73,23 +74,28 @@ async function subscribe(e) {
     errorMessage.style.display = "block";
     return;
   }
+  if (checkbox.checked === false) {
+    cantSubscribeText.style.display = "block";
+    return;
+  }
+  cantSubscribeText.style.display = "none";
   errorMessage.style.display = "none";
   subscribeButton.classList.add("loading");
   try {
-    const response = await fetch(
-      "https://api-bay-beta.vercel.app/api/v1/newsletter-home",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          emailAddress: emailInput.value,
-          investorType: checkbox.checked,
-        }),
-      }
-    );
-    const data = await response.json();
+    // const response = await fetch(
+    //   "https://api-bay-beta.vercel.app/api/v1/newsletter-home",
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       emailAddress: emailInput.value,
+    //       investorType: checkbox.checked,
+    //     }),
+    //   }
+    // );
+    // const data = await response.json();
     subscribeButton.classList.remove("loading");
     successMessage.style.display = "block";
     emailInput.value = "";
