@@ -1,5 +1,5 @@
 const teamCards = document.querySelectorAll(".team-card-teampage");
-
+console.log("team-member");
 // teamCards.forEach((card) => {
 //   const rolesText = card.querySelector(".cardposition");
 //   const rolesContainer = card.querySelector(".team-card-container");
@@ -16,11 +16,16 @@ const teamCards = document.querySelectorAll(".team-card-teampage");
 
 const roles = document.getElementById("team-positions");
 const container = document.getElementById("positions-container");
+const textContent = roles.textContent.split(",");
 
-roles.textContent.split(",").forEach((role) => {
+textContent.forEach((role, index) => {
   const roleElement = document.createElement("div");
   roleElement.classList.add("teamrole");
   roleElement.textContent = role;
+  console.log(index, role);
+  if (index < textContent.length - 1 && textContent.length > 1) {
+    roleElement.textContent = `${role},`;
+  }
   container.appendChild(roleElement);
 });
 

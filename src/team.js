@@ -1,5 +1,8 @@
 const teamCards = document.querySelectorAll(".team-card-teampage");
 
+const urlParams = new URLSearchParams(window.location.search);
+const myParam = urlParams.get("filter");
+
 teamCards.forEach((card) => {
   const rolesText = card.querySelector(".cardposition");
   const rolesContainer = card.querySelector(".team-card-container");
@@ -43,6 +46,7 @@ const filters = [
   "corporate",
 ];
 let selectedFilter = "everyone";
+
 everyoneButton.classList.add("selected");
 
 //Todo:
@@ -90,6 +94,13 @@ function handleButtonClickfilter(e, value, textContent) {
   } else {
     filterByPosition(value);
   }
+}
+
+if (myParam === "investment-team") {
+  everyoneButton.classList.remove("selected");
+  investmentTeamButton.classList.add("selected");
+  selectedFilter = "investment-team";
+  filterByPosition("investment-team");
 }
 
 buttons.forEach((button) => {
