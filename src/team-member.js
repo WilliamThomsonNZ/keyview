@@ -1,5 +1,4 @@
 const teamCards = document.querySelectorAll(".team-card-teampage");
-console.log("team-member");
 // teamCards.forEach((card) => {
 //   const rolesText = card.querySelector(".cardposition");
 //   const rolesContainer = card.querySelector(".team-card-container");
@@ -22,7 +21,6 @@ textContent.forEach((role, index) => {
   const roleElement = document.createElement("div");
   roleElement.classList.add("teamrole");
   roleElement.textContent = role;
-  console.log(index, role);
   if (index < textContent.length - 1 && textContent.length > 1) {
     roleElement.textContent = `${role},`;
   }

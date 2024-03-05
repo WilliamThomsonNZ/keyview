@@ -1,7 +1,5 @@
 import { handleAccordion } from "./helpers";
 
-console.log("credit-opportunies");
-
 const allFaqAccordions = [...document.querySelectorAll(".accordioncontainer")];
 
 allFaqAccordions.forEach((accordion, index) => {
