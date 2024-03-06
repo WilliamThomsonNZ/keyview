@@ -94,8 +94,8 @@ headerFundButton.addEventListener("click", () => {
       linksContainer.style.opacity = "1";
     }, 350);
   } else {
-    linksContainer.style.opacity = "0";
     fundArrow.style.transform = "rotate(0deg)";
+    linksContainer.style.opacity = "0";
     setTimeout(() => {
       headerContainer.style.height = headerClosedHeight;
     }, 300);
@@ -115,6 +115,18 @@ window.addEventListener("scroll", (e) => {
 
 //Fix animation.
 handleNewsletter();
+
+const hasSeenCookies = localStorage.getItem("hasSeenCookies");
+const cookieBanner = document.getElementById("cookie-bar");
+const cookieButton = document.getElementById("close-cookies");
+
+if (!hasSeenCookies && cookieBanner && cookieButton) {
+  cookieBanner.style.transform = "translateY(0px)";
+  cookieButton.addEventListener("click", () => {
+    localStorage.setItem("hasSeenCookies", true);
+    cookieBanner.style.transform = "translateY(100%)";
+  });
+}
 
 //handle newsletter submit
 //TODO:
