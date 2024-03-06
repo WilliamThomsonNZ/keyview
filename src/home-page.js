@@ -68,18 +68,31 @@ const errorMessage = document.getElementById("error-message");
 const successMessage = document.getElementById("success-message");
 const cantSubscribeText = document.getElementById("cant-subscribe-text");
 
+let checkboxChecked = false;
+checkbox.addEventListener("click", () => {
+  checkboxChecked = !checkboxChecked;
+});
+
 async function subscribe(e) {
   e.preventDefault();
+
   if (emailInput.value === "") {
     errorMessage.style.display = "block";
+    successMessage.style.display = "none";
+    cantSubscribeText.style.display = "none";
     return;
   }
-  if (checkbox.checked === false) {
+
+  if (!checkboxChecked) {
     cantSubscribeText.style.display = "block";
+    errorMessage.style.display = "none";
+    successMessage.style.display = "none";
     return;
   }
   cantSubscribeText.style.display = "none";
   errorMessage.style.display = "none";
+  successMessage.style.display = "none";
+
   subscribeButton.classList.add("loading");
   try {
     const response = await fetch(
@@ -101,7 +114,7 @@ async function subscribe(e) {
     emailInput.value = "";
     checkbox.checked = false;
     setTimeout(() => {
-      successMessage.style.display = "hidden";
+      successMessage.style.display = "none";
     }, 6000);
   } catch (error) {
     console.log(error);
