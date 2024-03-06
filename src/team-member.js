@@ -29,3 +29,10 @@ textContent.forEach((role, index) => {
 
 roles.style.display = "none";
 container.style.opacity = 1;
+
+const linkedInButtons = document.querySelectorAll(".teamlinkedin");
+linkedInButtons.forEach((button) => {
+  if (!button.href.includes("linkedin")) {
+    button.style.display = "none";
+  }
+});

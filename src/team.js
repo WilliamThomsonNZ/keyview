@@ -140,3 +140,11 @@ dropdownToggle.addEventListener("click", () => {
   }
   dropdownOpen = !dropdownOpen;
 });
+
+//handle no bio
+const cards = document.querySelectorAll(".bio-check");
+cards.forEach((card) => {
+  if (!card.firstChild) {
+    card.parentElement.style.pointerEvents = "none";
+  }
+});
