@@ -3,7 +3,7 @@ import { handleAccordion } from "./helpers.js";
 const capitalButton = document.getElementById("capital-button");
 const capitalHeader = document.getElementById("capital-header");
 const capitalContainer = document.getElementById("capital-container");
-let capitalOpen = open;
+let capitalOpen = false;
 const capitalInitialHeight = capitalContainer.clientHeight;
 
 handleAccordion({
