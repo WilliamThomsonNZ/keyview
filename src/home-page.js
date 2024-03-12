@@ -1,5 +1,5 @@
 import { handleAccordion } from "./helpers.js";
-
+import { gsap } from "gsap";
 const capitalButton = document.getElementById("capital-button");
 const capitalHeader = document.getElementById("capital-header");
 const capitalContainer = document.getElementById("capital-container");
@@ -147,4 +147,243 @@ function handleInvestorType(investorType, selected) {
     selected.push(investorType);
     return true;
   }
+}
+
+//Manage home page slider.
+// The idea is that we load the content of the slider.
+// Extract out the data from the posts.
+// Set up the slider so that it runs continously or when the button is clicked.
+
+const slides = document.querySelectorAll("#hero-carousel .list-item");
+let startingSlideText;
+let startingButton;
+let startingImage;
+
+let slideData = [];
+
+slides.forEach((slide, index) => {
+  if (index === 0) {
+    startingSlideText = slide.querySelector(".herotext");
+    startingButton = slide.querySelector(".herobuttonslider");
+    startingImage = slide.querySelector(".heroimage");
+  }
+  slideData.push({
+    text: slide.querySelector(".herotext").textContent,
+    button: slide.querySelector(".herobuttonslider").href,
+    image: slide.querySelector(".heroimage").srcset,
+  });
+});
+
+console.log(slideData);
+
+let currentSlide = 0;
+let slideInterval = setInterval(nextSlide, 10000);
+const mobileButtons = document.querySelectorAll(".herobutton");
+
+function nextSlide() {
+  const nextSlideIndex = (currentSlide + 1) % slideData.length;
+  const nextSlide = slideData[nextSlideIndex];
+  mobileButtons.forEach((button) => {
+    button.classList.remove("selected");
+  });
+  mobileButtons[nextSlideIndex].classList.add("selected");
+  gsap.to(startingSlideText, {
+    opacity: 0,
+    y: 25,
+    duration: 0.5,
+    onComplete: () => {
+      startingSlideText.textContent = nextSlide.text;
+      gsap.to(startingSlideText, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        delay: 0,
+      });
+    },
+  });
+
+  gsap.to(startingButton, {
+    opacity: 0,
+    duration: 0.5,
+    y: 25,
+    onComplete: () => {
+      startingButton.href = nextSlide.button;
+      gsap.to(startingButton, {
+        opacity: 1,
+        duration: 0.5,
+        y: 0,
+        delay: 0.2,
+      });
+    },
+  });
+
+  gsap.to(startingImage, {
+    opacity: 0,
+    duration: 0.5,
+    onComplete: () => {
+      startingImage.srcset = nextSlide.image;
+      gsap.to(startingImage, { opacity: 1, duration: 0.5 });
+    },
+  });
+  currentSlide = nextSlideIndex;
+}
+
+const loadingElement = document.getElementById("loading-inner");
+const animationDuration = 10000; // milliseconds
+const animationDelay = 500; // milliseconds
+let animation;
+
+function animateLoadingElement() {
+  animation = gsap.fromTo(
+    loadingElement,
+    { width: "0%" },
+    {
+      width: "100%",
+      ease: "none",
+      duration: animationDuration / 1000,
+      onComplete: resetAndAnimateLoadingElement,
+    }
+  );
+}
+
+function resetAndAnimateLoadingElement() {
+  animation.kill();
+  animateLoadingElement();
+}
+if (loadingElement) {
+  animateLoadingElement();
+}
+
+const nextButton = document.getElementById("next-hero-button");
+const prevButton = document.getElementById("prev-hero-button");
+
+if (nextButton) {
+  nextButton.addEventListener("click", () => {
+    clearInterval(slideInterval);
+    nextSlide();
+    resetAndAnimateLoadingElement();
+    slideInterval = setInterval(nextSlide, 10000);
+  });
+
+  prevButton.addEventListener("click", () => {
+    clearInterval(slideInterval);
+    const previousSlideIndex = currentSlide == 0 ? 2 : currentSlide - 1;
+    const previousSlide = slideData[previousSlideIndex];
+    gsap.to(startingSlideText, {
+      opacity: 0,
+      y: 25,
+      duration: 0.5,
+      onComplete: () => {
+        startingSlideText.textContent = previousSlide.text;
+        gsap.to(startingSlideText, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          delay: 0,
+        });
+      },
+    });
+
+    gsap.to(startingButton, {
+      opacity: 0,
+      duration: 0.5,
+      y: 25,
+      onComplete: () => {
+        startingButton.href = previousSlide.button;
+        gsap.to(startingButton, {
+          opacity: 1,
+          duration: 0.5,
+          y: 0,
+          delay: 0.2,
+        });
+      },
+    });
+
+    gsap.to(startingImage, {
+      opacity: 0,
+      duration: 0.5,
+      onComplete: () => {
+        startingImage.srcset = previousSlide.image;
+        gsap.to(startingImage, { opacity: 1, duration: 0.5 });
+      },
+    });
+    currentSlide = previousSlideIndex;
+    resetAndAnimateLoadingElement();
+    slideInterval = setInterval(nextSlide, 10000);
+  });
+}
+
+function setNextSlide(index) {
+  clearInterval(slideInterval);
+  const nextSlideIndex = index % slideData.length;
+  const nextSlide = slideData[nextSlideIndex];
+  gsap.to(startingSlideText, {
+    opacity: 0,
+    y: 25,
+    duration: 0.5,
+    onComplete: () => {
+      startingSlideText.textContent = nextSlide.text;
+      gsap.to(startingSlideText, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        delay: 0,
+      });
+    },
+  });
+  gsap.to(startingButton, {
+    opacity: 0,
+    duration: 0.5,
+    y: 25,
+    onComplete: () => {
+      startingButton.href = nextSlide.button;
+      gsap.to(startingButton, {
+        opacity: 1,
+        duration: 0.5,
+        y: 0,
+        delay: 0.2,
+      });
+    },
+  });
+  gsap.to(startingImage, {
+    opacity: 0,
+    duration: 0.5,
+    onComplete: () => {
+      startingImage.srcset = nextSlide.image;
+      gsap.to(startingImage, { opacity: 1, duration: 0.5 });
+    },
+  });
+  currentSlide = nextSlideIndex;
+  resetAndAnimateLoadingElement();
+  slideInterval = setInterval(nextSlide, 10000);
+}
+if (mobileButtons.length > 0) {
+  mobileButtons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      setNextSlide(index);
+      clearInterval(slideInterval);
+      resetAndAnimateLoadingElement();
+      slideInterval = setInterval(nextSlide, 10000);
+      mobileButtons.forEach((button) => {
+        button.classList.remove("selected");
+      });
+      button.classList.add("selected");
+    });
+  });
+}
+const numbers = document.querySelectorAll(".innernumber");
+const container = document.querySelector(".div-block-191");
+
+if (numbers.length > 0) {
+  numbers.forEach((number) => {
+    gsap.fromTo(
+      number,
+      { y: 0 },
+      {
+        y: (number.clientHeight - container.clientHeight - 5) * -1,
+
+        duration: 1.5,
+      }
+    );
+  });
 }

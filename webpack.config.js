@@ -13,6 +13,8 @@ module.exports = {
     ["contact"]: "./src/contact.js",
     ["private-credit"]: "./src/private-credit.js",
     ["application"]: "./src/application.js",
+    ["news-views"]: "./src/news-views.js",
+    ["blog"]: "./src/blog.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),

@@ -1,5 +1,6 @@
 import { handleNewsletter } from "./newsletter";
 import { newsletterSubmit } from "./newsletter-subscribe";
+import { gsap } from "gsap";
 
 newsletterSubmit();
 //Handle mobile menu
@@ -160,3 +161,17 @@ if (!hasSeenCookies && cookieBanner && cookieButton) {
 //     return true;
 //   }
 // }
+
+const topLine = document.getElementById("top-line");
+if (topLine) {
+  gsap.fromTo(
+    topLine,
+    { width: 0 },
+    {
+      width: "100%",
+      duration: 2.5,
+      delay: 0,
+      ease: "power4.inOut",
+    }
+  );
+}

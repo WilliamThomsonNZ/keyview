@@ -56,3 +56,5 @@ export function clearInputs(...inputs) {
     input.value = "";
   });
 }
+
+export function handleFundDownload() {}

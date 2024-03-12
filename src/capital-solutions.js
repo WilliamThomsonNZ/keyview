@@ -1,4 +1,19 @@
 import { handleAccordion } from "./helpers";
+import { gsap } from "gsap";
+const numbers = document.querySelectorAll(".innernumber");
+const container = document.querySelector(".numbercontainer");
+
+numbers.forEach((number) => {
+  gsap.fromTo(
+    number,
+    { y: 0 },
+    {
+      y: (number.clientHeight - container.clientHeight - 5) * -1,
+
+      duration: 1.5,
+    }
+  );
+});
 
 const corporateAdvisorButton = document.getElementById(
   "corporate-advisor-button"
