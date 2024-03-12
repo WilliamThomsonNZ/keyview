@@ -48,7 +48,6 @@ if (downloadButton) {
   downloadButton.addEventListener("click", () => {
     newsletterOverlay.style.display = "block";
     downloadContainer.style.display = "block";
-    console.log("click");
     setTimeout(() => {
       newsletterOverlay.style.opacity = "1";
       downloadContainer.style.opacity = "1";
@@ -61,7 +60,7 @@ if (closeDownloadButton) {
   closeDownloadButton.addEventListener("click", () => {
     newsletterOverlay.style.opacity = "0";
     downloadContainer.style.opacity = "0";
-    console.log("click");
+
     setTimeout(() => {
       newsletterOverlay.style.display = "none";
       downloadContainer.style.display = "none";
@@ -156,7 +155,6 @@ investorTypes.forEach((button) => {
 async function submitContactForm(e) {
   e.preventDefault();
   const pdf = e.target.href ? e.target.href : e.target.parentElement.href;
-  console.log(pdf);
 
   if (!isSophisticatedInvestor) return;
   contactSubmit.classList.add("loading");
@@ -194,40 +192,40 @@ async function submitContactForm(e) {
     window.open(pdf, "_blank");
   }
 
-  //Handle signup.
-  // try {
-  //   const response = await fetch(
-  //     "https://api-bay-beta.vercel.app/api/v1/newsletter",
-  //     {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         firstName: firstNameInput.value,
-  //         lastName: lastNameInput.value,
-  //         emailAddress: emailInput.value,
-  //         findOut: messageInput.value,
-  //         investorType: selected,
-  //         isSophisticatedInvestor,
-  //       }),
-  //     }
-  //   );
-  //   const data = await response.json();
+  // Handle signup.
+  try {
+    const response = await fetch(
+      "https://api-bay-beta.vercel.app/api/v1/fund",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: firstNameInput.value,
+          lastName: lastNameInput.value,
+          emailAddress: emailInput.value,
+          investorType: selected,
+          fundType: "credit-opportunities",
+        }),
+      }
+    );
+    const data = await response.json();
 
-  //   contactSubmit.classList.remove("loading");
-
-  //   const form = document.getElementById("email-form-container");
-  //   const successState = document.getElementById("success-state");
-  //   const formWelcome = document.getElementById("form-welcome");
-  //   form.style.display = "none";
-  //   formWelcome.style.display = "none";
-  //   successState.style.display = "flex";
-
-  //   clearInputs([firstNameInput, lastNameInput, emailInput, messageInput]);
-  // } catch (err) {
-  //   console.log(err);
-  // }
+    contactSubmit.classList.remove("loading");
+    const form = document.getElementById("email-form-container");
+    const successState = document.getElementById("success-state");
+    const formWelcome = document.getElementById("form-welcome");
+    // form.style.display = "none";
+    // formWelcome.style.display = "none";
+    // successState.style.display = "flex";
+    if (pdf) {
+      window.open(pdf, "_blank");
+    }
+    clearInputs([firstNameInput, lastNameInput, emailInput, messageInput]);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 contactSubmit.addEventListener("click", submitContactForm);
