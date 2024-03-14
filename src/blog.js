@@ -128,3 +128,26 @@ async function subscribeB(e) {
 if (subscribeButtonB !== null) {
   subscribeButtonB.addEventListener("click", subscribeB);
 }
+
+//Handle share links.
+const shareLinkedIn = document.getElementById("share-linkedIn");
+shareLinkedIn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}`;
+shareLinkedIn.target = "_blank";
+shareLinkedIn.rel = "noopener noreferrer";
+
+const shareButton = document.getElementById("share-button-linked");
+shareButton.href = `https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}`;
+shareButton.target = "_blank";
+shareButton.rel = "noopener noreferrer";
+
+const shareTwitter = document.getElementById("twitter-share");
+shareTwitter.href = `https://twitter.com/intent/tweet?url=${window.location.href}`;
+shareTwitter.target = "_blank";
+shareTwitter.rel = "noopener noreferrer";
+
+const shareFacebook = document.getElementById("facebook-share");
+shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`;
+shareFacebook.target = "_blank";
+shareFacebook.rel = "noopener noreferrer";
+
+// const shareInstagram = document.getElementById("instagram-share");
