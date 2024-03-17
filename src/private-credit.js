@@ -145,6 +145,7 @@ async function hanldeGraph() {
       ],
     },
     options: {
+      responsive: true,
       scales: {},
     },
   });
