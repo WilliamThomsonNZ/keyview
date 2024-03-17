@@ -1,4 +1,5 @@
 import { handleAccordion } from "./helpers.js";
+import Chart from "chart.js/auto";
 
 const capitalButton = document.getElementById("capital-button");
 const capitalHeader = document.getElementById("capital-header");
@@ -59,3 +60,94 @@ handleAccordion({
   initialHeight: marginInitialHeight,
   headerPadding: 0,
 });
+
+function extractData(data) {
+  const result = {};
+
+  data.forEach((row) => {
+    row.forEach((value, index) => {
+      // If the key (index) does not exist, create an array
+      if (!result[index]) {
+        result[index] = [];
+      }
+      // Push the value into the correct array
+      result[index].push(value);
+    });
+  });
+
+  return result;
+}
+
+async function hanldeGraph() {
+  const response = await fetch(
+    "https://api-bay-beta.vercel.app/api/v1/graph-data"
+  );
+  const graphJson = await response.json();
+  const chartData = extractData(graphJson.values);
+  console.log(chartData);
+
+  const chartContainer = document.getElementById("chart-container");
+  const canvas = document.createElement("canvas");
+  canvas.id = "myChart";
+  canvas.width = "100%";
+  canvas.height = "100%";
+  chartContainer.appendChild(canvas);
+  const ctx = document.getElementById("myChart").getContext("2d");
+  const myChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ], // X-axis labels
+      datasets: [
+        {
+          tension: 0.1,
+          fill: false,
+          cubicInterpolationMode: "monotone",
+          label: "Series 1", // Name of the first line
+          data: chartData[1]
+            .filter((index, items) => (index !== 0 ? true : false))
+            .map((item) => Number(item)), // Data points for the first line
+          borderColor: "green", // Line color
+          borderWidth: 2,
+        },
+        {
+          label: "Series 2", // Name of the second line
+          data: chartData[2]
+            .filter((index, items) => (index !== 0 ? true : false))
+            .map((item) => Number(item)), // Data points for the second line
+          borderColor: "black", // Line color
+          borderWidth: 2,
+          borderDash: [5, 5], // Dashed line`
+          cubicInterpolationMode: "monotone",
+        },
+        // {
+        //   label: "Series 3", // Name of the third line
+        //   data: chartData[2]
+        //     .filter((index, items) => (index !== 0 ? true : false))
+        //     .map((item) => Number(item)), // Data points for the third line
+        //   borderColor: "black", // Line color
+        //   borderWidth: 1,
+        //   cubicInterpolationMode: "monotone",
+        //   borderDash: [5, 15], // Dashed line
+        // },
+      ],
+    },
+    options: {
+      scales: {},
+    },
+  });
+}
+//Hnadle Graph
+hanldeGraph();

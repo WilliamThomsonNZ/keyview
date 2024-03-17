@@ -57,30 +57,11 @@ export function newsletterSubmit() {
   let dropdownOpen = false;
 
   const dropdownContainer = document.getElementById("dropdown-container-n");
-  // const dropDownButton = document.getElementById("dropdown-button-n");
-  // const dropDownIcon = document.getElementById("dropdown-icon-n");
-  // const dropdownText = document.getElementById("dropdown-text-n");
-
-  // dropDownButton.addEventListener("click", () => {
-  //   if (dropdownOpen) {
-  //     dropdownContainer.style.display = "none";
-  //     dropDownIcon.style.transform = "rotate(0deg)";
-  //     dropdownOpen = false;
-  //     return;
-  //   } else {
-  //     dropdownContainer.style.display = "flex";
-  //     dropDownIcon.style.transform = "rotate(180deg)";
-  //     dropdownOpen = true;
-  //   }
-  // });
   const yesButton = document.getElementById("yes-button-n");
   const noButton = document.getElementById("no-button-n");
 
   yesButton.addEventListener("click", () => {
     isSophisticatedInvestor = true;
-    // dropdownText.textContent = "Yes";
-    // dropdownContainer.style.display = "none";
-    // dropDownIcon.style.transform = "rotate(0deg)";
     contactSubmit.style.display = "block";
     cantApply.style.display = "none";
     yesButton.classList.add("selected");
@@ -93,10 +74,6 @@ export function newsletterSubmit() {
     cantApply.style.display = "block";
     noButton.classList.add("selected");
     yesButton.classList.remove("selected");
-
-    // dropdownText.textContent = "No";
-    // dropdownContainer.style.display = "none";
-    // dropDownIcon.style.transform = "rotate(0deg)";
   });
 
   const investorTypes = document.querySelectorAll(".radiobutton-newsletter");
