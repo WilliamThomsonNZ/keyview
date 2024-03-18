@@ -132,7 +132,7 @@ async function hanldeGraph() {
             const splitItem = item.replaceAll(",", "");
             return Number(splitItem);
           }), // Data points for the second line
-          borderColor: "#08111880", // Line color
+          borderColor: "#B7B7B7", // Line color
           borderWidth: 2, // Dashed line`
           cubicInterpolationMode: "monotone",
         },
@@ -142,8 +142,8 @@ async function hanldeGraph() {
             const splitItem = item.replaceAll(",", "");
             return Number(splitItem);
           }), // Data points for the second line
-          borderColor: "black", // Line color
-          borderWidth: 1,
+          borderColor: "#B7B7B7", // Line color
+          borderWidth: 2,
           borderDash: [5, 5], // Dashed line`
           cubicInterpolationMode: "monotone",
         },
@@ -161,6 +161,17 @@ async function hanldeGraph() {
     },
     options: {
       responsive: true,
+      elements: {
+        point: {
+          radius: 0,
+        },
+      },
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+
       scales: {
         y: {
           title: {
@@ -169,6 +180,14 @@ async function hanldeGraph() {
             padding: {
               bottom: 10,
             },
+          },
+          grid: {
+            color: "#f1f1f1",
+          },
+        },
+        x: {
+          grid: {
+            display: false,
           },
         },
         yAxes: [
