@@ -84,7 +84,6 @@ async function hanldeGraph() {
   );
   const graphJson = await response.json();
   const chartData = extractData(graphJson.values);
-  console.log(chartData);
 
   const chartContainer = document.getElementById("chart-container");
   const canvas = document.createElement("canvas");
@@ -93,42 +92,58 @@ async function hanldeGraph() {
   canvas.height = "100%";
   chartContainer.appendChild(canvas);
   const ctx = document.getElementById("myChart").getContext("2d");
+
+  chartData[0].shift();
+  chartData[1].shift();
+  chartData[2].shift();
+  chartData[3].shift();
+  chartData[4].shift();
+
   const myChart = new Chart(ctx, {
     type: "line",
     data: {
-      labels: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ], // X-axis labels
+      labels: chartData[0], // X-axis labels
       datasets: [
         {
           tension: 0.1,
           fill: false,
           cubicInterpolationMode: "monotone",
-          label: "Series 1", // Name of the first line
-          data: chartData[1]
-            .filter((index, items) => (index !== 0 ? true : false))
-            .map((item) => Number(item)), // Data points for the first line
-          borderColor: "green", // Line color
+          label: "RCFF", // Name of the first line
+          data: chartData[1].map((item) => {
+            const splitItem = item.replaceAll(",", "");
+            return Number(splitItem);
+          }), // Data points for the first line
+          borderColor: "#288767", // Line color
           borderWidth: 2,
         },
         {
-          label: "Series 2", // Name of the second line
-          data: chartData[2]
-            .filter((index, items) => (index !== 0 ? true : false))
-            .map((item) => Number(item)), // Data points for the second line
+          label: "RCOF", // Name of the second line
+          data: chartData[2].map((item) => {
+            const splitItem = item.replaceAll(",", "");
+            return Number(splitItem);
+          }), // Data points for the second line
+          borderColor: "#081118", // Line color
+          borderWidth: 2, // Dashed line`
+          cubicInterpolationMode: "monotone",
+        },
+        {
+          label: "RBA Cash Rate", // Name of the second line
+          data: chartData[3].map((item) => {
+            const splitItem = item.replaceAll(",", "");
+            return Number(splitItem);
+          }), // Data points for the second line
+          borderColor: "#08111880", // Line color
+          borderWidth: 2, // Dashed line`
+          cubicInterpolationMode: "monotone",
+        },
+        {
+          label: "ASX200", // Name of the second line
+          data: chartData[4].map((item) => {
+            const splitItem = item.replaceAll(",", "");
+            return Number(splitItem);
+          }), // Data points for the second line
           borderColor: "black", // Line color
-          borderWidth: 2,
+          borderWidth: 1,
           borderDash: [5, 5], // Dashed line`
           cubicInterpolationMode: "monotone",
         },
@@ -146,7 +161,29 @@ async function hanldeGraph() {
     },
     options: {
       responsive: true,
-      scales: {},
+      scales: {
+        y: {
+          title: {
+            display: true,
+            text: "Australian dollars",
+            padding: {
+              bottom: 10,
+            },
+          },
+        },
+        yAxes: [
+          {
+            ticks: {
+              callback: function (value, index, values) {
+                return value.toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "AUD",
+                });
+              },
+            },
+          },
+        ],
+      },
     },
   });
 }
