@@ -113,7 +113,7 @@ async function hanldeGraph() {
             const splitItem = item.replaceAll(",", "");
             return Number(splitItem);
           }), // Data points for the first line
-          borderColor: "#288767", // Line color
+          borderColor: "#34AD84", // Line color
           borderWidth: 2,
         },
         {
@@ -157,6 +157,7 @@ async function hanldeGraph() {
         //   cubicInterpolationMode: "monotone",
         //   borderDash: [5, 15], // Dashed line
         // },
+        //
       ],
     },
     options: {
