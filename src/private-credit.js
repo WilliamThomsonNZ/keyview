@@ -113,7 +113,7 @@ async function hanldeGraph() {
             const splitItem = item.replaceAll(",", "");
             return Number(splitItem);
           }), // Data points for the first line
-          borderColor: "#34AD84", // Line color
+          borderColor: "rgba(52, 173, 132, 0.85)", // Line color
           borderWidth: 2,
         },
         {
