@@ -47,7 +47,8 @@ if (newsletterOverlay) {
   });
 }
 if (downloadButton) {
-  downloadButton.addEventListener("click", () => {
+  downloadButton.addEventListener("click", (e) => {
+    e.preventDefault();
     newsletterOverlay.style.display = "block";
     downloadContainer.style.display = "block";
     setTimeout(() => {

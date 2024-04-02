@@ -6,6 +6,7 @@ import {
 } from "./helpers.js";
 const allFaqAccordions = [...document.querySelectorAll(".accordioncontainer")];
 
+console.log("fix");
 allFaqAccordions.forEach((accordion, index) => {
   const header = accordion.querySelector(`.faqheader`);
   const button = accordion.querySelector(`.accordionbutton`);
@@ -45,7 +46,8 @@ if (newsletterOverlay) {
   });
 }
 if (downloadButton) {
-  downloadButton.addEventListener("click", () => {
+  downloadButton.addEventListener("click", (e) => {
+    e.preventDefault();
     newsletterOverlay.style.display = "block";
     downloadContainer.style.display = "block";
     setTimeout(() => {
@@ -219,9 +221,7 @@ async function submitContactForm(e) {
     // form.style.display = "none";
     // formWelcome.style.display = "none";
     // successState.style.display = "flex";
-    if (pdf) {
-      window.open(pdf, "_blank");
-    }
+
     clearInputs([firstNameInput, lastNameInput, emailInput, messageInput]);
   } catch (err) {
     console.log(err);
