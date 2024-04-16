@@ -15,6 +15,7 @@ module.exports = {
     ["application"]: "./src/application.js",
     ["news-views"]: "./src/news-views.js",
     ["blog"]: "./src/blog.js",
+    ["gate"]: "./src/gate.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
